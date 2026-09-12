@@ -2,7 +2,7 @@
  * Assign Cookies
  * Difficulty: Easy
  * Topic: Greedy > Easy
- * Time complexity: O(N log N)
+ * Time complexity: O(N log N) + O(M log M) + O(N)
  * Space complexity: O(1)
  * Solved: 2026-09-12
  * URL: https://leetcode.com/problems/assign-cookies/
