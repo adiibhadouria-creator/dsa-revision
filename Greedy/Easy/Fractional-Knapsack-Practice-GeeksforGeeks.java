@@ -12,6 +12,7 @@
  *
  * Notes:
  * Custom operator , creating array of custom operator Item which is also a class
+ * There is one heap approach also there with same time complexity but just work for custom sorting part else the logic is same
  */
 
 // code here
