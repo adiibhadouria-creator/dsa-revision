@@ -1,0 +1,148 @@
+ reference -> https://youtu.be/XRcC7bAtL3c?si=fRgXooZkCO7wZFj3
+The Intuition: The "State Machine" Pattern
+It feels like a trick right now, but it is actually a pure application of Systems Thinking. We are building a micro-system (a state machine) to manually simulate what the computer's memory does automatically during recursion.
+
+Think about how standard recursion works. A computer visits every single node in a binary tree exactly three times:
+
+First Visit (Arriving): You just reached the node from the top. (This is when we print Preorder). Then, you travel down its Left path.
+
+Second Visit (Returning from Left): You hit a dead end on the left and bounce back up to the node. (This is when we print Inorder). Then, you travel down its Right path.
+
+Third Visit (Returning from Right): You hit a dead end on the right and bounce back up to the node for the final time. (This is when we print Postorder). Your business with this node is completely done, so you retreat to its parent.
+
+When we write iterative code, we don't have the computer's hidden call stack to remember which "visit" we are on. So, we create a Pair to track the state manually. The number 1, 2, 3 isn't a random trick; it is literally the node's current lifecycle stage.
+
+The Algorithm (Pseudocode)
+Create three lists: Pre, In, Post.
+
+Create a Stack that holds pairs: [TreeNode, State].
+
+Push the (root, 1) into the stack.
+
+Loop until the stack is empty:
+
+Grab the top pair from the stack (don't pop it yet, just peek).
+
+If State == 1 (Arriving):
+
+Add node to Pre.
+
+Update its state to 2.
+
+If a left child exists, push (left_child, 1) to the stack.
+
+If State == 2 (Back from Left):
+
+Add node to In.
+
+Update its state to 3.
+
+If a right child exists, push (right_child, 1) to the stack.
+
+If State == 3 (Back from Right):
+
+Add node to Post.
+
+POP the pair from the stack (it is dead to us now!).
+
+Dry Run: A Simple 3-Node Tree
+Let's use a basic root with two children:
+
+Plaintext
+      1
+    /   \
+   2     3
+Setup: Stack = [(1, State 1)]
+
+Loop 1: Top is (1, State 1). Add 1 to Preorder. Change state to 2. Push Left child 2.
+
+Pre: [1] | Stack: [(1, State 2), (2, State 1)]
+
+Loop 2: Top is (2, State 1). Add 2 to Preorder. Change state to 2. Left is null.
+
+Pre: [1, 2] | Stack: [(1, State 2), (2, State 2)]
+
+Loop 3: Top is (2, State 2). Add 2 to Inorder. Change state to 3. Right is null.
+
+In: [2] | Stack: [(1, State 2), (2, State 3)]
+
+Loop 4: Top is (2, State 3). Add 2 to Postorder. POP 2. (Notice how it leaves the stack!)
+
+Post: [2] | Stack: [(1, State 2)]
+
+Loop 5: Top is (1, State 2). Add 1 to Inorder. Change state to 3. Push Right child 3.
+
+In: [2, 1] | Stack: [(1, State 3), (3, State 1)]
+
+(The pattern now repeats exactly for node 3: Pre -> In -> Post -> POP)
+
+Final Loop: Eventually, the stack only has [(1, State 3)]. We add 1 to Postorder and POP 1. The stack is empty. We are done!
+
+The Code Line-by-Line
+Java
+// We need a simple Pair class to hold our Node and its current State together
+class Pair {
+    TreeNode node;
+    int state;
+    public Pair(TreeNode node, int state) {
+        this.node = node;
+        this.state = state;
+    }
+}
+
+class Solution {
+    public void allTraversals(TreeNode root) {
+        Stack<Pair> st = new Stack<>();
+        List<Integer> pre = new ArrayList<>();
+        List<Integer> in = new ArrayList<>();
+        List<Integer> post = new ArrayList<>();
+
+        if (root == null) return;
+
+        // Start the system by pushing the root at State 1
+        st.push(new Pair(root, 1));
+
+        while (!st.isEmpty()) {
+            // Peek at the top pair. We don't pop because it might need to stay for states 1 and 2
+            Pair curr = st.peek();
+
+            // STATE 1: First visit
+            if (curr.state == 1) {
+                pre.add(curr.node.val); // Add to Preorder
+                curr.state++;           // Upgrade state to 2 for the next time we see it
+                
+                // If there is a left path, explore it next by pushing it at state 1
+                if (curr.node.left != null) {
+                    st.push(new Pair(curr.node.left, 1));
+                }
+            } 
+            // STATE 2: Returned from Left
+            else if (curr.state == 2) {
+                in.add(curr.node.val);  // Add to Inorder
+                curr.state++;           // Upgrade state to 3 for the final time we see it
+                
+                // If there is a right path, explore it next by pushing it at state 1
+                if (curr.node.right != null) {
+                    st.push(new Pair(curr.node.right, 1));
+                }
+            } 
+            // STATE 3: Returned from Right
+            else {
+                post.add(curr.node.val); // Add to Postorder
+                st.pop();                // The lifecycle is over. NOW we remove it from the stack!
+            }
+        }
+    }
+}
+How to Apply This to New Problems
+Whenever you face a complex tree or graph problem where you need to process data before diving deep, during the traversal, and after coming back up (like calculating subtree sums, tracking paths, or flattening structures), you don't need to memorize a new trick.
+
+You can build a scalable framework by attaching a "State" to your data structures. You are explicitly defining the lifecycle of your data:
+
+State 1 = "Exploring"
+
+State 2 = "Processing Sub-tasks"
+
+State 3 = "Finalizing & Cleaning Up"
+
+By explicitly mapping out the stages, you remove the "magic" from the algorithm and replace it with a robust, predictable system.
