@@ -44,3 +44,37 @@ class Solution {
         as soon as we are getting it now refer right boundary*/
         boundary.add(node.data);
         if(node.left!=null){
+            leftBoundary(node.left,boundary);
+        }
+        else{
+            leftBoundary(node.right,boundary);
+        }
+    }
+    public void leaf(Node node,ArrayList<Integer> boundary){
+        if(node == null) return;
+        if(isLeaf(node)) {
+            boundary.add(node.data);
+            return;
+        }
+        leaf(node.left,boundary);
+        leaf(node.right,boundary);
+    }
+    public void rightBoundary(Node node,ArrayList<Integer> boundary){
+        if(node == null || isLeaf(node)) return;
+        
+        if(node.right!=null){
+            rightBoundary(node.right,boundary);
+        }
+        else{
+            rightBoundary(node.left,boundary);
+        }
+        /*here we want value in reverse order so we first go till right most then 
+        while coming back we add so automatically values are added in reverse manner*/
+       boundary.add(node.data);
+    }
+    public boolean isLeaf(Node node){
+        return node.left == null && node.right == null;
+    }
+}
+        boundary.add(node.data);
+        if(node.left!=null){
