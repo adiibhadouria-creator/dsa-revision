@@ -1,21 +1,3 @@
-/*
- * Boundary Traversal Of Binary Tree
- * Platform: GeeksforGeeks
- * Difficulty: Not specified
- * Topic: Binary Tree
- * Time complexity: o
- * Space complexity: o
- * Solved: 2026-09-23
- * URL: https://www.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
- * Language: Java
- *
- * Problem statement:
- * Not captured.
- *
- * Notes:
- * None
- */
-
 class Solution {
     public ArrayList<Integer> boundaryTraversal(Node root) {
         /* also see the iterative version of it
@@ -39,8 +21,38 @@ class Solution {
     }
     
     public void leftBoundary(Node node,ArrayList<Integer> boundary){
-        if(node == null || isLeaf(node)) return;
-        /*here we want answer in left boundary so just adding values 
-        as soon as we are getting it now refer right boundary*/
-        boundary.add(node.data);
-        if(node.left!=null){
+        
+        if(!isLeaf(node)) boundary.add(node.data);    
+        while(node.left!=null){
+            node = node.left;
+        }
+        else{
+            leftBoundary(node.right,boundary);
+        }
+    }
+    public void leaf(Node node,ArrayList<Integer> boundary){
+        if(node == null) return;
+        if(isLeaf(node)) {
+            boundary.add(node.data);
+            return;
+        }
+        leaf(node.left,boundary);
+        leaf(node.right,boundary);
+    }
+    public void rightBoundary(Node node,ArrayList<Integer> boundary){
+        List<Integer> temp = new ArrayList<>();
+        if(!isLeaf(node)) temp.add(node.data);    
+        if(node.right!=null){
+            rightBoundary(node.right,boundary);
+        }
+        else{
+            rightBoundary(node.left,boundary);
+        }
+        /*here we want value in reverse order so we first go till right most then 
+        while coming back we add so automatically values are added in reverse manner*/
+       boundary.add(node.data);
+    }
+    public boolean isLeaf(Node node){
+        return node.left == null && node.right == null;
+    }
+}
