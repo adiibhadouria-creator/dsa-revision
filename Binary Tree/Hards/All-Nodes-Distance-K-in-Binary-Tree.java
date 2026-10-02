@@ -1,17 +1,7 @@
-/*
- * All Nodes Distance K in Binary Tree
- * Platform: LeetCode
- * Difficulty: Not specified
- * Topic: Binary Tree > Hards
+
  * Time complexity: O(2n)
  * Space complexity: O(2n)
- * Solved: 2026-10-02
- * URL: https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/submissions/2159688599/
- * Language: java
- *
- * Problem statement:
- * Not captured.
- *
+
  * Notes:
  * think about k as levels and target as root then all k levels noddr from target is the answer which is bfs
 
