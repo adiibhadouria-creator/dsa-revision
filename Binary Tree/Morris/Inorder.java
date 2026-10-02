@@ -1,21 +1,5 @@
-/*
- * Morris traversal for Inorder
- * Platform: GeeksforGeeks
- * Difficulty: Not specified
- * Topic: Binary Tree > Morris Inorder
- * Time complexity: O(N)
- * Space complexity: O(1)
- * Solved: 2026-10-02
- * URL: https://www.geeksforgeeks.org/problems/inorder-traversal/1
- * Language: Java
- *
- * Problem statement:
- * Not captured.
- *
- * Notes:
- * None
- */
-
+constant space traversal
+    
 class Solution {
     public ArrayList<Integer> inOrder(Node root) {
        ArrayList<Integer> inorder = new ArrayList<>();
