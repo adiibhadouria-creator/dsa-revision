@@ -1,21 +1,3 @@
-/*
- * Maximum Alternating Subarray Sum With One Deletion
- * Platform: LeetCode
- * Difficulty: Not specified
- * Topic: LeetCode  > Weekly Contest
- * Time complexity: O(n)
- * Space complexity: O(1)
- * Solved: 2026-10-04
- * URL: https://leetcode.com/problems/maximum-alternating-subarray-sum-with-one-deletion/submissions/2161912282/
- * Language: java
- *
- * Problem statement:
- * Not captured.
- *
- * Notes:
- * 4 states dp
- */
-
 class Solution {
     public long maxAlternatingSum(int[] nums) {
         final long infinity = Long.MIN_VALUE/2;
