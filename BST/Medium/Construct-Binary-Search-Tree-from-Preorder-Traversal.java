@@ -1,22 +1,37 @@
-/*
- * Construct Binary Search Tree from Preorder Traversal
- * Platform: LeetCode
- * Difficulty: Not specified
- * Topic: BST > Medium
- * Time complexity: O(n)
- * Space complexity: O(h)
- * Solved: 2026-10-04
- * URL: https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/submissions/2162233375/
- * Language: java
- *
- * Problem statement:
- * Not captured.
- *
+
  * Notes:
  * BRUTE FORCE-> We know inorder traversal of bst in sorted so just copy the preorder and sort it now you have both preorder and inorder you can generate a BST using recursion.
 TC-> nlog n SC-> n+h
 
-
+class Solution {
+    public TreeNode bstFromPreorder(int[] preorder) {
+        int n = preorder.length;
+        TreeNode root = new TreeNode(preorder[0]);
+        if(n==1) return root;
+        Stack<TreeNode> st = new Stack<>();
+        st.push(root);
+        TreeNode curr = root;
+        int i=1;
+        while(i<n){
+            TreeNode child = new TreeNode(preorder[i]);
+            if(child.val<curr.val){
+                curr.left = child
+            }
+            else{
+                while(!st.isEmpty() && st.peek().val<child.val){
+                    curr = st.pop();
+                }
+                curr.right = child;
+                
+            }
+            st.push(child);
+            curr = child;
+            i++;
+         }
+      
+     return root;
+    }
+}
 BETTER-> what inorder was giving me is who is left to current root and who is right to current root
 as i know in preorder my first element is definitely the root , so every element smaller than that in array will be part of its left subtree and bigger are part of its right subtree thus , we need to know for every element if it is smaller attach to my left but if it is bigger i need to find someone whose right i can be , so we will use a stack monotonic prooperty here push element into stack if its value is smaller and make the top one current but if the value comes to be greater than the top then pop out from stack till the value in stack is either greater ti this or we geet the root node and then assign this as right child  , and continue
 
