@@ -1,17 +1,4 @@
-/*
- * Minimum Rotations to Dial a Number II
- * Platform: LeetCode
- * Difficulty: Not specified
- * Topic: LeetCode > Weekly Contest
- * Time complexity: O(n)
- * Space complexity: O(1)
- * Solved: 2026-10-04
- * URL: https://leetcode.com/problems/minimum-rotations-to-dial-a-number-ii/submissions/2161816109/
- * Language: java
- *
- * Problem statement:
- * Not captured.
- *
+
  * Notes:
  * we have to find the point where on rotating we get the maximum benefit , so one thing more we do not need to reverse the array every time , after reversing only thing changes the distance of prev element could either be to curr element if not reversedd or it could be with the last element as after reversal that will be our curr , and between them nothing changes as dist(a,b) = dist(b,a).
 
