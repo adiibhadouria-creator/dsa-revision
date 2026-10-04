@@ -1,21 +1,3 @@
-/*
- * Longest Subarray With Restricted Pair Sums
- * Platform: LeetCode
- * Difficulty: Not specified
- * Topic: LeetCode > Weekly Contest
- * Time complexity: O(n)
- * Space complexity: O(501)
- * Solved: 2026-09-27
- * URL: https://leetcode.com/problems/longest-subarray-with-restricted-pair-sums/submissions/2154786645/
- * Language: java
- *
- * Problem statement:
- * Not captured.
- *
- * Notes:
- * None
- */
-
 class Solution {
     public int maxSubarray(int[] nums) {
         int n = nums.length;
