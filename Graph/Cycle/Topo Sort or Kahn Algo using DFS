@@ -1,3 +1,4 @@
+-------ONLY WORKS IN DAG---------
 class Solution {
     public int[] topoSort(int V, List<List<Integer>> adj) {
         boolean[] visited = new boolean[V];
