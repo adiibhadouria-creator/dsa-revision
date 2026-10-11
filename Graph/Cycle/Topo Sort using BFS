@@ -1,0 +1,30 @@
+class Solution {
+    public int[] topoSort(int V, List<List<Integer>> adj) {
+        //there are 3 steps for bfs 
+        //1. add all nodes with indegree 0 into queue
+        //2. pop them out one by one and decrease their neighbour indegree count
+        //3. add nodes if their indegree becomes 0
+        int[] indegree = new int[V];
+        for(int i=0;i<V;i++){
+            for(int j=0;j<adj.get(i).size();j++){
+                int neighbour = adj.get(i).get(j);
+                indegree[neighbour]++;
+            }
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i=0;i<V;i++){
+            if(indegree[i]==0) queue.add(i);
+        }
+        int[] topo = new int[V];
+        int i=0;
+        while(!queue.isEmpty()){
+            int top = queue.poll();
+            topo[i++]=top;
+            for(int x:adj.get(top)){
+                indegree[x]--;
+                if(indegree[x]==0) queue.add(x);
+            }
+        }
+        return topo;
+    }
+}
