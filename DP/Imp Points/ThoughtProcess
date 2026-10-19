@@ -2,3 +2,6 @@ First of all, how do we think it is a DP problem? If, in the question, it is giv
 1. The first step for getting the installation and idea of recursion is to try to represent the problem in the form of indexes.
 2. Perform all possible stuff on the index according to the problem, and also figure out edge cases. Edge cases will help you in getting base cases also.
 3. The final step will be: if they ask for the count of all ways, then sum of all steps, and if they ask for max or min of steps, then find max of min of
+
+
+-> If there is an index-1 or index-2 means we want something which is precomputed we can always do space optimization.
