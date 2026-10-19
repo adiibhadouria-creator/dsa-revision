@@ -1,0 +1,4 @@
+First of all, how do we think it is a DP problem? If, in the question, it is given to count the number of ways to do this, or if they ask for the maximum number of ways, the maximum of this data, or the minimum of this data, then we can think of recursion. If there is recursion, we can think of DP. If there is recursion, we can think of memorization. From memorization, we can move to tabulation, and from tabulation, we can do space optimization.
+1. The first step for getting the installation and idea of recursion is to try to represent the problem in the form of indexes.
+2. Perform all possible stuff on the index according to the problem, and also figure out edge cases. Edge cases will help you in getting base cases also.
+3. The final step will be: if they ask for the count of all ways, then sum of all steps, and if they ask for max or min of steps, then find max of min of
