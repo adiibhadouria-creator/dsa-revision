@@ -1,19 +1,7 @@
 /*
- * Geeks Training
- * Platform: GeeksforGeeks
- * Difficulty: Not specified
- * Topic: DP > 2D
+
  * Time complexity: O(12N)
  * Space complexity: O(N) +O( Nx 4). ---O(Nx4)
- * Solved: 2026-10-25
- * URL: https://www.geeksforgeeks.org/problems/geeks-training/1
- * Language: Java
- *
- * Problem statement:
- * Not captured.
- *
- * Notes:
- * just dp magic
  */
 
 class Solution {
@@ -47,3 +35,27 @@ class Solution {
         return func(n-1,3,mat,dp);
     }
 }
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Tabulation + space optimised
+ int[] prev = new int[4];
+        //fill base cases , update day zero
+        int a = matrix[0][0] , b = matrix[0][1] , c= matrix[0][2];
+        prev[0] = Math.max(b,c);
+        prev[1] = Math.max(a,c);
+        prev[2] = Math.max(a,b);
+        prev[3] = Math.max(a,Math.max(b,c));
+
+        for(int day=1;day<n;day++){
+            int[] curr = new int[4];
+            for(int last = 0;last<4;last++){
+                curr[last] = 0;
+                for(int task = 0;task<3;task++){
+                    if(task!=last){
+                        int points = matrix[day][task] + prev[task];
+                        curr[last] = Math.max(curr[last],points);
+                    }
+                }
+            }
+            prev = curr;
+        }
+        return prev[3];
