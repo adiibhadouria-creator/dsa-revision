@@ -5,3 +5,7 @@ First of all, how do we think it is a DP problem? If, in the question, it is giv
 
 
 -> If there is an index-1 or index-2 means we want something which is precomputed we can always do space optimization.
+
+-> Whenever you use recursion + memoization return f(-----) instead of return dp[n-1];
+
+
